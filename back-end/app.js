@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 //路由工具
 // var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 var positionRouter = require('./routes/position');
 //创建一个应用程序
 var app = express();
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/api/position',positionRouter);
 
 // catch 404 and forward to error handler

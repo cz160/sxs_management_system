@@ -27,6 +27,8 @@ const _init = () => {
     router.route('/position-save',position_controller.save)
     //列表信息页面
     router.route('/position-list', position_controller.list)
+    //修改职位信息页面
+    router.route('/position-update',position_controller.update)
     //错误页面
     router.route('/not-found', (req, res, next) => { // 当路由切换进来的时候执行
         res.render(not_found_template)
@@ -43,8 +45,8 @@ const _init = () => {
         
     })
     //给bus绑定事件(通过发布订阅模式处理router无法再两个页面中使用的问题)
-    bus.on('go',(path)=>{
-        router.go(path);
+    bus.on('go',(path,body={})=>{
+        router.go(path,body);
     })
     bus.on('back',()=>{
         router.go();
