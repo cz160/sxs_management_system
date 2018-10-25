@@ -4,15 +4,24 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="save-form">
+        <form class="form-horizontal" id="save-form" enctype="multipart/form-data">
             <div class="box-body">
+                <!--公司logo图片-->
+                <div class="form-group">
+                        <label for="companyName" class="col-sm-2 control-label">公司Logo</label>
+        
+                        <div class="col-sm-10">
+                            <input required type="file" name="companyLogo" id="companyLogo">
+                        </div>
+                </div>
+                <!--公司名称-->
                 <div class="form-group">
                     <label for="companyName" class="col-sm-2 control-label">公司名称</label>
-    
                     <div class="col-sm-10">
                         <input required type="text" class="form-control" name="companyName" id="companyName" placeholder="请输入公司名字">
                     </div>
                 </div>
+                 <!--职位名称-->
                 <div class="form-group">
                     <label for="positionName" class="col-sm-2 control-label">职位名称</label>
     
@@ -20,6 +29,7 @@
                         <input type="text" class="form-control" name="positionName" id="positionName" placeholder="请输入职位名称">
                     </div>
                 </div>
+                 <!--工作地点-->
                 <div class="form-group">
                     <label for="city" class="col-sm-2 control-label">工作地点</label>
     
@@ -27,6 +37,7 @@
                         <input type="text" class="form-control" name="city" id="city" placeholder="请输入工作地点">
                     </div>
                 </div>
+                 <!--薪资范围-->
                 <div class="form-group">
                     <label for="salary" class="col-sm-2 control-label">薪资范围</label>
     

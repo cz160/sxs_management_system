@@ -10,15 +10,25 @@ const list = ()=>{
         }
     })
 }
-//提供添加数据
-const save = (data)=>{
-    return $.ajax({
-        url:'api/position/save',
-        type:'post',
-        data,
-        success:(results)=>{
-            return results;
-        }
+//提供保存数据
+const save = ()=>{
+    // return $.ajax({
+    //     url:'api/position/save',
+    //     type:'post',
+    //     data,
+    //     success:(results)=>{
+    //         return results;
+    //     }
+    // })
+    //使用jq.from插件（处理图片上传）
+    return new Promise((resolve)=>{
+        $('.position-save #save-form').ajaxSubmit({
+            url:'/api/position/save',
+            type:'POST',
+            success:(results)=>{
+                resolve(results)
+            }
+        })
     })
 }
 //提供删除数据

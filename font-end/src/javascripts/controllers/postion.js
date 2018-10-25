@@ -56,14 +56,18 @@ const bindSaveEvent = ()=>{
     //点击返回列表
     $('.position-save #back').on('click', function () {
         bus.emit('go', '/position-list')
-    })
+    });
+    let _isLoading = false;  //开关防止多次提交（等提交完成后才能再次提交）
     //当表单提交时
     $('.position-save #save-form').submit(async function(e){
         //清楚默认提交
         e.preventDefault?e.preventDefault():returnValue=false;
+        if(_isLoading)return false;
+        _isLoading = true;
         //拿到form的数据
-        let _params = qs.parse($(this).serialize());
-        let result = await position_model.save(_params);
+        // let _params = qs.parse($(this).serialize());
+        let result = await position_model.save();
+        _isLoading=false;  //一次保存完成后打开开关
         if(result.status==200){
             alert('成功')
         }else{

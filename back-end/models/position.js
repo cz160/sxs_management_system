@@ -2,6 +2,8 @@
 const mongoose = require('../util/mongoose');
 //事件戳处理模块
 const Moment = require('moment');
+const fs = require('fs-extra') 
+const PATH = require('path') 
 
 //创建一个集合positions
 var Position = mongoose.model('positions', new mongoose.Schema({
@@ -10,7 +12,8 @@ var Position = mongoose.model('positions', new mongoose.Schema({
     companyName: String,
     salary: String,
     createTime: String,
-    formatTime: String
+    formatTime: String,
+    companyLogo: String
 }));
 //list接口
 const list = () => {
@@ -40,11 +43,14 @@ const save = (body) => {
         })
 }
 //remove接口数据
-const remove = ({ id })=>{
+const remove = async({ id })=>{
     //根据id删除某条数据
+    let _row = await listone({ id })
     return Position.deleteOne({ _id: id }).
     then((results)=>{
         results.deleteId=id;
+        //点击删除这条数据后，删除保存的图片
+        fs.removeSync(PATH.resolve(__dirname, '../public'+_row.companyLogo))
         return results;
     }).
     catch((err) => {

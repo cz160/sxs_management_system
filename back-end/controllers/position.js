@@ -11,8 +11,8 @@ const list=async (req,res)=>{
 }
 //添加职位
 const save = async (req,res)=>{
-    //接受到发送过来的数据 req.body
-    console.log(req.body);
+    //接受到发送过来的数据 req.body,存入数据库
+    // console.log(req.body);
     res.set('content-type','application/json; charset=utf8');
     let _data =await position_model.save(req.body);
     res.render('position',{
