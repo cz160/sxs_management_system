@@ -1,80 +1,61 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | 登录</title>
-  <!-- 告诉浏览器该页面是自适应布局 -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="/static/libs/adminLTE/libs/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/static/libs/adminLTE/libs/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="/static/libs/adminLTE/libs/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/static/libs/adminLTE/libs/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="/static/libs/adminLTE/libs/skin-blue.min.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- 警告：Respond.js 不支持 file:// 方式查看（即本地方式查看）-->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
+	<link href="/static/libs/login/css/style.css" rel='stylesheet' type='text/css' />
+	<link href='http://cdn.webfont.youziku.com/webfonts/nomal/123576/46719/5bd07e04f629d90818cda452.css' rel='stylesheet'>
+	<link href='http://cdn.webfont.youziku.com/webfonts/nomal/123576/46719/5bd085c4f629d90818cda455.css' rel='stylesheet' type='text/css' />
+	<script src="/static/libs/adminLTE/libs/jquery-2.2.3.min.js"></script>
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>SXS</b>LTE</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">帐户登录</p>
-    <form action="./index.html" method="GET">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="邮箱">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label style="padding-left: 20px;">
-              <input type="checkbox">
-              <span>记住我</span>
-            </label>
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-    <!--跳转到注册页面-->
-    <a href="javascripts:void(0)" class="text-center">注册新会员</a>
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
 
-<!-- jQuery 3 -->
-<script src="/static/libs/adminLTE/libs/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="/static/libs/adminLTE/libs/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/static/libs/adminLTE/libs/app.min.js"></script>
-</body>
-<script>
-    
+<body>
+	<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});	  
+});
 </script>
+	<!--SIGN UP-->
+	<h1 class="css154b958a801e2b8">实习生后台管理系统</h1>
+	<div class="login-form">
+		<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+		<div class="clear"> </div>
+		<div class="avtar">
+			<img src="/static/images/avtar.png" />
+		</div>
+		<form>
+			<input type="text" class="text" value="Username" onfocus="this.value = '';" placeholder="Username">
+			<div class="key">
+				<input type="password" value="Password" onfocus="this.value = '';"  placeholder="Password" style="margin-bottom: 1em;">
+			</div>
+		</form>
+		<div style="padding: 0em 3em 1em 5em;text-align:left;color: #9199aa;font-size: 14px">
+			<span>没有账号?</span>
+			<a href="#" style="color: white;"class="css154bb3d0131e2b8">去注册</a>
+		</div>
+		<div class="signin">
+			<input type="submit" value="Login">
+		</div>
+	</div>
+</body>
+
 </html>
