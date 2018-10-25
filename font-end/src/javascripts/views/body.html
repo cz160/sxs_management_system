@@ -1,13 +1,12 @@
 
-  <!-- Main Header -->
+  <!-- 头部 -->
   <header class="main-header">
-
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>实习</b>生</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>实习生</b>后台管理系统</span>
+      <span class="logo-lg"><b>实习僧</b>后台管理系统</span>
     </a>
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -53,7 +52,6 @@
             </ul>
           </li>
           <!-- /.messages-menu -->
-
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
@@ -120,7 +118,8 @@
               <!-- The user image in the navbar-->
               <img src="/static/libs/adminLTE/images/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <!--动态渲染用户名-->
+              <span class="hidden-xs username"></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -128,7 +127,7 @@
                 <img src="/static/libs/adminLTE/images/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  <span class="username">Alexander Pierce - Web Developer</span>
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -153,7 +152,7 @@
                   <a href="#" class="btn btn-default btn-flat">设置</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">退出</a>
+                  <a href="http://localhost:9000/system.html" class="btn btn-default btn-flat">退出</a>
                 </div>
               </li>
             </ul>
@@ -166,19 +165,17 @@
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
+  <!-- 左边部分-->
   <aside class="main-sidebar">
-
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
           <img src="/static/libs/adminLTE/images/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p class="username"></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
         </div>
@@ -211,16 +208,9 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Page Header
-        <small>Optional description</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
+    <!-- 根据路由待渲染的头部 -->
+    <section class="content-header" id="router-head">
+     
     </section>
 
     <!-- 根据路由待渲染的部分 -->

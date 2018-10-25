@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 //路由工具
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var userInfo = require('./routes/user_info');
 var positionRouter = require('./routes/position');
 //创建一个应用程序
 var app = express();
@@ -26,9 +25,10 @@ app.use(cookieParser());
 //处理静态资源
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+//职位信息路由
 app.use('/api/position',positionRouter);
+//用户信息路由
+app.use('/api/user', userInfo);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

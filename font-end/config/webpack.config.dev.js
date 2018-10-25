@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         //main: ['./src/javascripts/app','./src/javascripts/login']
         app:'./src/javascripts/app',
-        login:'./src/javascripts/login'
+        system:'./src/javascripts/system'
     },
     //出口
     output:{
@@ -41,10 +41,10 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             //使用自己的模版
-            template: './src/login.html',
-            filename:'login.html',
+            template: './src/system.html',
+            filename:'system.html',
             //规定其只引入哪个Js
-            chunks: ['login']
+            chunks: ['system']
         }),
         //使用copy-webpack-plugin插件处理静态资源文件
         new CopyWebpackPlugin([{

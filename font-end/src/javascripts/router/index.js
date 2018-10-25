@@ -12,9 +12,7 @@ var router = null
 
 // 启动路由的方法
 const _init = () => {
-
     router = new SMERouter('router-view')
-
     // 中间件会先执行
     router.use((req, res, next) => {
         _activeLink(req.route)    //根据hash值将对应的列表加上选中
@@ -60,7 +58,8 @@ const _navLink = (selector) => {
     let $navs = $(selector || '.sidebar-menu li[to]')
     $navs.on('click', function () {
         let _path = $(this).attr('to')
-        router.go(_path)
+        router.go(_path);
+        _activeLink(_path);
     })
 }
 
@@ -72,9 +71,6 @@ const _activeLink = (route) => {
     //将当前路由对应的加上选中
     $navs.filter(`[to='${route}']`).addClass('active').siblings().removeClass('active')
 }
-
-
-
 export default {
     init: _init,
     navLink: _navLink
