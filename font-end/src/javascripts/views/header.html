@@ -1,8 +1,15 @@
 <h1>
-    <span>{{ msg1 }}</span>
-    <small>{{ msg2 }}</small>
+    <span>{{ title }}</span>
+    <small>{{ description }}</small>
 </h1>
+<!--面包蟹效果-->
 <ol class="breadcrumb">
-        <li><a href="http://localhost:9000/#/home"><i class="fa fa-dashboard"></i>返回首页</a></li>
-        <li class="active">Here</li>
+        <li><a href="#/home"><i class="fa fa-dashboard"></i>返回首页</a></li>
+        <% for(var i=0;i< list.length;i++) {%>
+            <li class="<%= i==(list.length)-1?'active':''%>">
+                <a href="<%= list[i].path?list[i].path:'javascript:void(0)'%>">
+                    {{list[i].text}}
+                </a>
+            </li>
+        <% } %>
 </ol>

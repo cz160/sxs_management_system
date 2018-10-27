@@ -9,13 +9,13 @@ import position_save_template from '../views/position-save.html'
 import position_update_template from '../views/position-update.html';
 //引入职位信息数据
 import position_model from '../models/position'
-import qs from 'qs';
 //list业务逻辑处理
 const list = async (req, res, next) => { // 当路由切换进来的时候执行
     req.query = req.query || {}  //防止没有参数时，req.query为null
     let _page = { //页面信息，当点击了分页器按钮后，页面的url改变，list控制器重新执行,重新获取数据渲染
-        pageNo: req.query.pageNo,
-        pageSize: req.query.pageSize,
+        pageNo: req.query.pageNo||1,
+        pageSize: req.query.pageSize||10,
+        keyword:req.query.keyword||''
     }
     let _data =await position_model.list(_page);
     let html = template.render(position_list_template,{
@@ -23,6 +23,8 @@ const list = async (req, res, next) => { // 当路由切换进来的时候执行
     })
     res.render(html)
     bindListEvent(_page)   // 绑定事件
+    //显示搜素关键字
+    $('.position-list #keywords').val(_page.keyword)
 }
 
 //list的事件绑定(通过发布订阅模式处理router无法再两个页面中使用的问题)
@@ -44,8 +46,11 @@ const bindListEvent = (_page)=>{
     $("#possearch").on('click',()=>{
         //搜索关键字
         let keyword= $('#keywords').val();
-        console.log(keyword);
-        bus.emit('go','/position-list?keyword=c'+keyword)
+        let _params={
+            keyword:keyword,
+            pageNo:1
+        }
+        bus.emit('go',`/position-list?${$.param(_params)}`)
     })
 }
 //删除操作
@@ -58,7 +63,7 @@ const handleRemove= async function(_page){
     let trs = $('.position-list__tabel tr[data-id]');  //通过判断页面还有多少tr来判断是否为只有一个数据
     let _pageNo =trs.length>1?_page.pageNo:(_page.pageNo-(_page.pageNo>1?1:0));
     if(_data.status==200){
-        bus.emit('go', '/position-list?pageNo='+_pageNo+'&_'+id);
+        bus.emit('go', '/position-list?pageNo='+_pageNo+'&_'+id+'&'+"keyword="+_page.keyword);
     }else{
         console.log("出现了不可预知的错误");
     }

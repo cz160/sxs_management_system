@@ -12,7 +12,6 @@ const listall=async (req,res)=>{
 }
 //根据参数获取某一页数据
 const list=async (req,res)=>{
-    console.log(req.query);
     res.set('content-type', 'application/json; charset=utf8')
     let _data= await position_model.list(req.query);
     res.render('position', { 
@@ -34,9 +33,7 @@ const save = async (req,res)=>{
 //删除职位
 const remove = async(req,res)=>{
     res.set('content-type','application/json; charset=utf8');
-    // console.log(req.query);
     let _data =await position_model.remove(req.query);
-    // console.log(_data);
     res.render('position',{
         code:200,
         data:JSON.stringify(_data)
