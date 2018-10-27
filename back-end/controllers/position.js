@@ -1,9 +1,20 @@
 let position_model = require('../models/position');
-
 //list控制器
-const list=async (req,res)=>{
+
+//获取全部数据
+const listall=async (req,res)=>{
     res.set('content-type', 'application/json; charset=utf8')
-    let _data= await position_model.list();
+    let _data= await position_model.listall();
+    res.render('position', { 
+        code: 200, 
+        data: JSON.stringify(_data) 
+    })
+}
+//根据参数获取某一页数据
+const list=async (req,res)=>{
+    console.log(req.query);
+    res.set('content-type', 'application/json; charset=utf8')
+    let _data= await position_model.list(req.query);
     res.render('position', { 
         code: 200, 
         data: JSON.stringify(_data) 
@@ -50,9 +61,10 @@ const update =async(req,res)=>{
     })
 }
 module.exports={
-    list,
+    listall,
     save,
     remove,
     listone,
-    update
+    update,
+    list
 }
