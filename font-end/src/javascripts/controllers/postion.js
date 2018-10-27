@@ -12,36 +12,53 @@ import position_model from '../models/position'
 import qs from 'qs';
 //list业务逻辑处理
 const list = async (req, res, next) => { // 当路由切换进来的时候执行
+    req.query = req.query || {}  //防止没有参数时，req.query为null
+    let _page = { //页面信息，当点击了分页器按钮后，页面的url改变，list控制器重新执行,重新获取数据渲染
+        pageNo: req.query.pageNo,
+        pageSize: req.query.pageSize,
+    }
+    let _data =await position_model.list(_page);
     let html = template.render(position_list_template,{
-        data: (await position_model.list() ).data
+        data: _data.data
     })
     res.render(html)
-    bindListEvent()   // 绑定事件
+    bindListEvent(_page)   // 绑定事件
 }
 
 //list的事件绑定(通过发布订阅模式处理router无法再两个页面中使用的问题)
-const bindListEvent = ()=>{
+const bindListEvent = (_page)=>{
     //点击添加按钮切换路由
     $('.position-list #addbtn').on('click',function(){
         bus.emit('go','/position-save');
     })
-    //点击删除
-    $('.pos-remove').on('click',handleRemove);
     //点击修改
     $('.position-list .pos-update').on('click',function(){
         let id = $(this).parents('tr').data('id');
         bus.emit('go','/position-update',{ id });
     })
-
+     //点击删除
+     $('.pos-remove').on('click',function(){
+        handleRemove.bind(this,_page)();
+    });
+    //点击搜索按钮
+    $("#possearch").on('click',()=>{
+        //搜索关键字
+        let keyword= $('#keywords').val();
+        console.log(keyword);
+        bus.emit('go','/position-list?keyword=c'+keyword)
+    })
 }
 //删除操作
-const handleRemove= async function(){
+const handleRemove= async function(_page){
     //获取到当前这条数据的id
     let id = $(this).parents('tr').data('id');
     //得到后端响应的数据
     let _data = await position_model.remove({id:id});
+    //获取当前为第几页(并且当这是这一页的最后一个数据时要回到上一页)
+    let trs = $('.position-list__tabel tr[data-id]');  //通过判断页面还有多少tr来判断是否为只有一个数据
+    let _pageNo =trs.length>1?_page.pageNo:(_page.pageNo-(_page.pageNo>1?1:0));
     if(_data.status==200){
-        bus.emit('go', '/position-list?_='+id);
+        bus.emit('go', '/position-list?pageNo='+_pageNo+'&_'+id);
     }else{
         console.log("出现了不可预知的错误");
     }
@@ -78,8 +95,7 @@ const bindSaveEvent = ()=>{
 }
 
 //修改页面业务逻辑
-const update =async (req,res)=>{
-    // console.log(req.body);
+const update =async (req,res)=>{ 
     let { id } = req.body //要进行更新这条数据的id
     let html = template.render(position_update_template,{
         data: (await position_model.listone({ id })).data  //根据id获取到某一页数据
@@ -98,9 +114,8 @@ const bindUpdateEvent =()=>{
         //阻止默认提交
         e.preventDefault?e.preventDefault():returnValue=false;
         //获取当前表单的所有数据(id是通过隐藏表单传入)
-        let _data = qs.parse($(this).serialize());
-        let _result = await position_model.update(_data);
-        // console.log(_result);
+        // let _data = qs.parse($(this).serialize());
+        let _result = await position_model.update();
         if(_result.status==200){
             alert('修改成功');
             bus.emit('go', '/position-list')

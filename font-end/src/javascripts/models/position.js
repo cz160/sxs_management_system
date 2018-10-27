@@ -1,7 +1,8 @@
 //提供职位列表信息
-const list = ()=>{
+const list = (page)=>{
     return $.ajax({
         url: '/api/position/list',
+        data:page,
         success:(results) => {
            return results
         },
@@ -12,14 +13,6 @@ const list = ()=>{
 }
 //提供保存数据
 const save = ()=>{
-    // return $.ajax({
-    //     url:'api/position/save',
-    //     type:'post',
-    //     data,
-    //     success:(results)=>{
-    //         return results;
-    //     }
-    // })
     //使用jq.from插件（处理图片上传）
     return new Promise((resolve)=>{
         $('.position-save #save-form').ajaxSubmit({
@@ -52,14 +45,16 @@ const listone = (data)=>{
     })
 }
 //更新某条数据
-const update = (data)=>{
-    return $.ajax({
-        url:'/api/position/update',
-        type:'post',
-        data,
-        success:(results)=>{
-            return results;
-        }
+const update =()=>{
+    //通过jq.from.js插件实现数据请求，默认会传递所有的表单元素的值
+    return new Promise((resolve)=>{
+        $('.position-update #update-form').ajaxSubmit({
+            url:'/api/position/update',
+            type:'POST',
+            success:(results)=>{
+                resolve(results);
+            }
+        })
     })
 }
 export default{
