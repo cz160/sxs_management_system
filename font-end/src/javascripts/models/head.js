@@ -6,6 +6,11 @@ const pageHeaderInfo = (url,prevUrl)=>{
     //有参数时的所有参数
     let _search = Url.parse(prevUrl).search;
     //当有参数时的所有参数（?keyword=a&pageNo=1）
+    if(_search==null){
+        _search="";
+    }else{
+        _search=_search;
+    }
     let _infos = {
         '/home': {
             title: '首页',

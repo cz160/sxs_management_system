@@ -1,5 +1,5 @@
 import qs from 'qs';
-import login_model from '../models/login_model'
+import login_model from '../models/admin'
 const login = () => {
     //登录部分业务逻辑
     //点击去注册

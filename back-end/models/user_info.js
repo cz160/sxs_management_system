@@ -1,26 +1,36 @@
-
+//引入链接数据库工具
 const mongoose = require('../util/mongoose');
-
-var User = mongoose.model('users', new mongoose.Schema({
+//引入加密工具
+const bcrypt = require('bcrypt');
+//创建一个集合
+var UserModel = mongoose.model('users', new mongoose.Schema({
     username: String,
     email: String,
-    password: String
+    password: String,
 }));
-//保存用户数据到数据中
-const save = (body)=>{
-    return new User({
-        ...body
+//保存数据到数据库中，并对用户密码进行加密
+const save = async({username,password,email})=>{
+    //对密码进行加密
+    var saltRounds = 10;
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var _password = bcrypt.hashSync(password, salt);
+    //存入数据库
+    return new UserModel({
+        username,
+        password:_password,
+        email
     }).save()
     .then((results) => {
-        return results
+        let {_id,username,email} = results;
+        return {_id,username,email};
     })
     .catch((err) => {
         return false;
     })
 }
-//查询数据库中是否存在本信息
-const find = (body)=>{
-    return User.find({'username':body.username,'password':body.password})
+//通过用户名验证是否存在这个用户
+const find = (username)=>{
+    return UserModel.find({username})
     .then((results)=>{
         return results
     })

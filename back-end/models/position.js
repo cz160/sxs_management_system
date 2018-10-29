@@ -117,10 +117,11 @@ const listone = ({
 //update接口数据
 const update = (body) => {
     //如果不修改图片那么继续为未修改前的图片
-    if (!body.companyLogo) delete body.companyLogo
-    //当修改图片后，从问价中删除上一张图片
-    if (body.old_img) {
-        fs.removeSync(PATH.resolve(__dirname, '../public' + body.old_img));
+    if (!body.companyLogo){
+        delete body.companyLogo
+    }else{
+         //当修改图片后，从文件中删除上一张图片
+         fs.removeSync(PATH.resolve(__dirname, '../public' + body.old_img));
     }
     console.log(body);
     //如果选了重新发布
