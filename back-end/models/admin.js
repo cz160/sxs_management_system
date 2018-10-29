@@ -28,7 +28,7 @@ const save = async({username,password,email})=>{
         return false;
     })
 }
-//通过用户名验证是否存在这个用户
+//通过用户名查询是否存在这个用户
 const find = (username)=>{
     return UserModel.find({username})
     .then((results)=>{
@@ -38,7 +38,12 @@ const find = (username)=>{
         return false;
     })
 }
+//对比数据库中的加密密码与用户传入的密码是否匹配
+const signin = (pwd,{ password })=>{
+    return bcrypt.compareSync(pwd,password);
+}
 module.exports = {
     save,
-    find
+    find,
+    signin
 }

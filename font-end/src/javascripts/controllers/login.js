@@ -12,17 +12,14 @@ const login = () => {
     $('#login_form').submit(async function (e) {
         e.preventDefault();
         let _data =qs.parse($(this).serialize());
-        let result = await login_model.find(_data);
+        let _result = await login_model.find(_data);
         //判断查询的的数据中是否存在匹配用户名与密码的数据
-        if(result.status==200 && result.data[0]){
-            alert('登录成功');
-            //将当前用户信息存入localStorage中
-            let data = JSON.stringify(result.data[0])
-            let storage = window.localStorage;
-            storage.setItem("userInfo",data);
-            location.href='http://localhost:9000/#/home';
-        }else{
-            alert('用户名或密码错误');
+        switch(_result.status){
+            case 203:alert("密码错误");break;
+            case 202:alert("用户不存在");break;
+            default:
+                window.location.href="/#/home";
+                break;
         }
     })
 }

@@ -9,7 +9,7 @@ const save = (data)=>{
         }
     })
 }
-//查询用户信息
+//登录：查询用户信息
 const find = (data)=>{
     return $.ajax({
         url:'/api/user/signin',

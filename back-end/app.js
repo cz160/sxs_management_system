@@ -4,31 +4,46 @@ var path = require('path');
 //解析cookie模块
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var session = require('express-session');
 //路由工具
-var userInfo = require('./routes/user_info');
+var adminRouter = require('./routes/admin');
 var positionRouter = require('./routes/position');
+var userRouter = require('./routes/user')
+
+
 //创建一个应用程序
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+//使用session中间件
+app.use(session({
+  secret: 'i love u', // 加密密钥
+  resave: false,
+  saveUninitialized: true,
+  cookie: { // set cookie使让浏览器怎样存cookie
+    path: '/', 
+    httpOnly: true, 
+    secure: false, 
+    maxAge: 1000 * 60 * 60 * 24  // session的过期的时间 单位：ms
+  }
+}))
 //使用各种中间件
 app.use(logger('dev'));
 // body-parser 处理form-data和request payload数据
 // express 4.X 内部集成了body-parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser()); //解析cookie
+
 //处理静态资源
 app.use(express.static(path.join(__dirname, 'public')));
-
 //职位信息路由
 app.use('/api/position',positionRouter);
+//登录注册路由
+app.use('/api/user', adminRouter);
 //用户信息路由
-app.use('/api/user', userInfo);
+app.use('/api/userInfo',userRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
