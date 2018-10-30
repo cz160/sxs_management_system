@@ -10,6 +10,16 @@ const getUserInfoById = (id)=>{
                         return false;
                     })
 }
+//返回所有注册的用户数
+const getAlluser = ()=>{
+    return UserModel.find({})
+                    .then((results)=>{
+                        return results.length;
+                    }).catch((err)=>{
+                        return false;
+                    })
+}
 module.exports ={
-    getUserInfoById
+    getUserInfoById,
+    getAlluser
 }

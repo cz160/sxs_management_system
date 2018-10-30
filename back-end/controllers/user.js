@@ -34,8 +34,16 @@ const isSignIn = (req, res,next) => {
         code: _isSignIn ? 200 : 201, data: JSON.stringify({ msg: _isSignIn ? '已经登录' : '未登录' })
     })
 }
+const getAlluser = async(req,res,next)=>{
+    let result = await user_model.getAlluser();
+    res.render('user',{
+        code:200,
+        data:JSON.stringify({num:result})
+    })
+}
 module.exports = {
     getUserInfo,
     exit,
-    isSignIn
+    isSignIn,
+    getAlluser
 }

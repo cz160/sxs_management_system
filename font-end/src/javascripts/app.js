@@ -10,6 +10,7 @@ import userinfo_contrller from './controllers/user-info'
  // 渲染整体内容结构
  $('#wrapper').html(body_template)
 //判断是否登录（登录后可以进入，没登录直接到登录页面）
+<<<<<<< HEAD
 let init =async()=>{
     let result = await userSigninState();
     if(result){
@@ -26,6 +27,21 @@ let init =async()=>{
 }
 init();    
     
+=======
+// 渲染整体内容结构
+$('#wrapper').html(body_template)
+userSigninAuth((auth)=>{
+    // 启动主体部分路由
+    router.init()
+    //头部路由
+    router_two.init()
+    //渲染用户信息和职位头信息
+    userinfo_contrller.renderUserInfo();
+},()=>{
+    //没登录
+     window.location.href="http://localhost:9000/system.html"
+})
+>>>>>>> master
 
 
 
