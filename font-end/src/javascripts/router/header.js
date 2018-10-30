@@ -14,6 +14,11 @@ const _init = () => {
         prevUrl = req.url
         res.render(html);
     })
+    router.route('/map',(req,res,next)=>{
+        let html = template.render(head_template,head_model.pageHeaderInfo(req.url,prevUrl))
+        prevUrl = req.url
+        res.render(html);
+    })
     //根据hash值渲染页面
     router.route('/position-save',(req,res,next)=>{
         let html = template.render(head_template,head_model.pageHeaderInfo(req.url,prevUrl))

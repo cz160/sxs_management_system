@@ -16,6 +16,10 @@ const pageHeaderInfo = (url,prevUrl)=>{
             title: '首页',
             list:[]
         },
+        '/map':{
+            title: '地图页面',
+            list:[] 
+        },
         '/position-list': {
             title: '职位管理',
             description: '职位列表',
