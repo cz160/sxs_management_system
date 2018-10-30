@@ -3,12 +3,10 @@ import SMERouter from 'sme-router'
 //引入自定义事件工具
 import bus from '../util/bus'
 import home_template from '../views/home.html'
-import map_template from '../views/map.html'
 import not_found_template  from '../views/404.html'
-
 //职位信息和新增职位的控制器
 import position_controller from '../controllers/postion'
-
+import map_controller from '../controllers/map'
 var router = null
 
 // 启动路由的方法
@@ -29,9 +27,7 @@ const _init = () => {
     //修改职位信息页面
     router.route('/position-update',position_controller.update)
     //地图展示页面
-    router.route('/map',(req, res, next) => { // 当路由切换进来的时候执行
-        res.render(map_template)
-    })
+    router.route('/map',map_controller.map);
     //错误页面
     router.route('/not-found', (req, res, next) => { // 当路由切换进来的时候执行
         res.render(not_found_template)
