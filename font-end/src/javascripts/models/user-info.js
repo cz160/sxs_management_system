@@ -2,24 +2,20 @@
 const getUserInfo = () => {
     return $.ajax({
         url: '/api/userInfo/info',
-        success: (results) => {
-            return results
-        }
-    })
-}
-//退出
-const exit = () => {
-    return $.ajax({
-        url: '/api/userInfo/exit',
+        data:{
+            token:localStorage.getItem('token') || ''
+        },
         success: (results) => {
             return results
         }
     })
 }
 //判断是否为登录状态
-const isSignIn = () => {
+const isSignIn = ({token}) => {
     return $.ajax({
         url: '/api/userInfo/issignin',
+        type:'GET',
+        data:{ token },
         success: (results) => {
             return results
         }
@@ -36,7 +32,6 @@ const getAllUserNum = ()=>{
 }
 export default {
     getUserInfo,
-    exit,
     isSignIn,
     getAllUserNum
 }

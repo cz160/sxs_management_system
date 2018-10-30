@@ -5,7 +5,7 @@ var UserModel =  mongoose.model('users');
 const getUserInfoById = (id)=>{
     return UserModel.find({_id:id})
                     .then((results)=>{
-                        return results[0]
+                        return results[0];
                     }).catch((err)=>{
                         return false;
                     })

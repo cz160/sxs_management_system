@@ -1,4 +1,5 @@
 let user_model = require('../models/admin');
+let jwt = require('jsonwebtoken');
 //注册
 const signup = async(req,res,next)=>{
     res.set('content-type','application/json; charset=utf8');
@@ -30,13 +31,18 @@ const signin = async (req,res,next) =>{
         let _data = await user_model.signin(req.body.password,_judge_result[0]);
         //登录成功
         if(_data){
-            //存session
-            req.session.userinfo = {
-                userid:_judge_result[0]._id
+            //使用token(对称加密)
+            let _payload = { //要加密的数据
+                userid:_judge_result[0]._id,
+                username:_judge_result[0].username
             }
+            let _cert = 'i love u'  //密钥
+            var _token = jwt.sign(_payload,_cert);
             res.render('admin',{
                 code:200,
-                data:JSON.stringify("登录成功")
+                data:JSON.stringify({
+                    token:_token
+                })
             })
         }else{
             res.render('admin',{

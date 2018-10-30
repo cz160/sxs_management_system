@@ -11,8 +11,8 @@ import userinfo_contrller from './controllers/user-info'
  $('#wrapper').html(body_template)
 //判断是否登录（登录后可以进入，没登录直接到登录页面）
 let init =async()=>{
-    let result = await userSigninState();
-    if(result){
+    let isSignIn = await userSigninState();
+    if(isSignIn){
             // 启动主体部分路由
             router.init()
             //头部路由

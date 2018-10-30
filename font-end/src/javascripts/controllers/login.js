@@ -18,6 +18,8 @@ const login = () => {
             case 203:alert("密码错误");break;
             case 202:alert("用户不存在");break;
             default:
+                //将token存在localstorage.token中
+                localStorage.token = _result.data.token;
                 window.location.href="/#/home";
                 break;
         }

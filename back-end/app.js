@@ -16,18 +16,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-//使用session中间件
-app.use(session({
-  secret: 'i love u', // 加密密钥
-  resave: false,
-  saveUninitialized: true,
-  cookie: { // set cookie使让浏览器怎样存cookie
-    path: '/', 
-    httpOnly: true, 
-    secure: false, 
-    maxAge: 1000 * 60 * 60 * 24  // session的过期的时间 单位：ms
-  }
-}))
 //使用各种中间件
 app.use(logger('dev'));
 // body-parser 处理form-data和request payload数据
