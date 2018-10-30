@@ -1,4 +1,4 @@
-
+//获取用户信息
 const getUserInfo = () => {
     return $.ajax({
         url: '/api/userInfo/info',
@@ -7,6 +7,7 @@ const getUserInfo = () => {
         }
     })
 }
+//退出
 const exit = () => {
     return $.ajax({
         url: '/api/userInfo/exit',
@@ -15,7 +16,7 @@ const exit = () => {
         }
     })
 }
-
+//判断是否为登录状态
 const isSignIn = () => {
     return $.ajax({
         url: '/api/userInfo/issignin',
