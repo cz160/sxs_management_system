@@ -4,7 +4,6 @@ var path = require('path');
 //解析cookie模块
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
 //路由工具
 var adminRouter = require('./routes/admin');
 var positionRouter = require('./routes/position');
