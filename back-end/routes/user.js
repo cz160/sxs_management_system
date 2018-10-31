@@ -12,6 +12,7 @@ var { resApplicationJson } = require('../middlewares')
  router.get('/info',auth.userSigninAuth,user_controller.getUserInfo);
  //判断登录状态
  router.get('/issignin',auth.userSigninAuth,user_controller.isSignIn);
+ router.get('/check',auth.userSigninAuth,user_controller.check)
 //获得所有的用户信息
 router.get('/all',user_controller.getAlluser)
  module.exports= router;

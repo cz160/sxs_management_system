@@ -15,7 +15,6 @@ const userSigninAuth = (req, res, next) => {
             next()
         }        
     }catch(err) {  //无法解密
-        console.log(req.query.token)
         res.render('user', {
             code: 403,
             data: JSON.stringify({ msg: '请登录后操作' })

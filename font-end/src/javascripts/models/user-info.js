@@ -30,8 +30,21 @@ const getAllUserNum = ()=>{
         }
     })
 }
+const check = (auth)=>{
+    return $.ajax({
+        url:'/api/userInfo/check',
+        data:{
+            auth,
+            token:localStorage.getItem('token') || ''
+        },
+        success:(results)=>{
+            return results
+        }
+    })
+}
 export default {
     getUserInfo,
     isSignIn,
-    getAllUserNum
+    getAllUserNum,
+    check
 }

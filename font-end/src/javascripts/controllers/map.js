@@ -1,6 +1,13 @@
 import map_template from '../views/map.html'
-
-const map = (req, res) => {
+import not_allow_templat from '../views/not-allow.html'
+import user_model from '../models/user-info'
+const map = async(req, res) => {
+    let _result = await user_model.check('/map');
+    console.log(_result)
+    if(_result.status==304){
+        res.render(not_allow_templat);
+        return false;
+    }
     res.render(map_template)
     if (!window.AMap) {
         let $script = $('<script  src="https://webapi.amap.com/maps?v=1.4.10&key=4b03905b1ff241e6e8a1dc11450661f7&callback=onApiLoaded&plugin=AMap.Transfer,AMap.Geocoder" >')

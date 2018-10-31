@@ -20,6 +20,24 @@ const getUserInfo= async (req, res) => {
     })
 
 }
+//查询权限
+const check = async(req,res)=>{
+    //需要的权限
+   let auth = user_model.auths()[req.query.auth];
+   //当前用户的权限
+   let _canauth = req.token.auth;
+   if(_canauth>=auth){
+       res.render('user',{
+           code:200,
+           data:JSON.stringify({msg:"可以操作"})
+       })
+   }else{
+        res.render('user',{
+            code:304,
+            data:JSON.stringify({msg:"权限不够"})
+        })  
+   }    
+}
 const getAlluser = async(req,res,next)=>{
     let result = await user_model.getAlluser();
     res.render('user',{
@@ -30,5 +48,6 @@ const getAlluser = async(req,res,next)=>{
 module.exports = {
     getUserInfo,
     isSignIn,
+    check,
     getAlluser
 }

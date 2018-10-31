@@ -19,7 +19,14 @@ const getAlluser = ()=>{
                         return false;
                     })
 }
+//权限数据
+const auths = ()=>{
+    return {
+        '/map':6,
+    }
+}
 module.exports ={
     getUserInfoById,
-    getAlluser
+    getAlluser,
+    auths
 }
